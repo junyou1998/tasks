@@ -4,26 +4,24 @@ const { ref, onMounted } = Vue;
 const App = {
     setup() {
         const tasks = ref([]);
-
         const addShow = ref(false);
         // Task CRUD
-        const refreshData = async () => {
+        const getTasks = async () => {
+            console.log("觸發update");
             axios.get(API_URL + "/api/tasks").then((res) => {
                 tasks.value = res.data;
+                console.log(res.data);
             });
         };
-
         let enterPressed = false;
         const addNewTask = async (event) => {
-
+            if (event.type === "blur" && enterPressed) {
+                enterPressed = false;
+                return;
+            }
             if (event.type === "keyup" && event.key === "Enter") {
                 enterPressed = true;
                 event.target.blur();
-            }
-
-            if (event.type === "blur" && enterPressed) {
-                enterPressed = false; 
-                return;
             }
 
             let newTasks = document.querySelector("#newTask").value;
@@ -32,10 +30,9 @@ const App = {
                 const formData = new FormData();
                 formData.append("newTasks", newTasks);
 
-                axios.post(API_URL + "/api/tasks", formData).then((res) => {
-                    refreshData();
-                    // alert(res.data);
-
+                await axios.post(API_URL + "/api/tasks", formData).then((res) => {
+                    // 直接將返回內容手動加入vue變數
+                    tasks.value.unshift(res.data);
                     console.log("add successful");
 
                     // 清空輸入框
@@ -51,8 +48,12 @@ const App = {
         const deleteTask = async (_id) => {
             navigator.vibrate(10);
             axios.delete(API_URL + "/api/tasks/" + _id).then((res) => {
-                refreshData();
-                // alert(res.data);
+                // 刪除特定id的物件
+                const index = tasks.value.findIndex((task) => task._id === _id);
+                if (index !== -1) {
+                    tasks.value.splice(index, 1);
+                }
+
                 console.log("delete successful");
             });
         };
@@ -60,8 +61,12 @@ const App = {
             axios
                 .patch(API_URL + "/api/tasks/" + _id, { updateTask: updateValue, doneStatus: status })
                 .then((res) => {
-                    refreshData();
-                    // alert(res.data);
+                    // 把回傳更新內容直接加入vue變數中
+                    const index = tasks.value.findIndex((task) => task._id === _id);
+                    if (index !== -1) {
+                        tasks.value[index] = { ...tasks.value[index], ...res.data };
+                    }
+
                     console.log("update successful");
                 })
                 .catch((err) => {
@@ -76,7 +81,7 @@ const App = {
             });
         };
 
-        onMounted(refreshData);
+        onMounted(getTasks);
         return { tasks, addNewTask, deleteTask, updateTask, addShow, showInput };
     },
 };

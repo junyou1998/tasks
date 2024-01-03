@@ -18,13 +18,12 @@
                 <button @click="showInput()" id="addTask" title="新增工作"><i class="bx bx-message-square-add"></i> 新增工作</button>
             </div>
             <div class="newTask fade-transition" :class="{ 'fade-enter-active': addShow }">
-                <input type="text" id="newTask" class="inputText" @blur="addNewTask($event)" @keyup.enter="addNewTask($event)" placeholder="輸入工作內容"/>
+                <input id="newTask" class="inputText" @blur="addNewTask($event)" @keyup.enter="addNewTask($event)" placeholder="輸入工作內容"/>
             </div>
             <div v-for="task in tasks" :key="task._id" class="taskslist">
                 <input type="checkbox" v-model="task.done" @change="updateTask(task._id,task.description, task.done)" class="checkBtn" />
 
                 <input
-                    type="text"
                     v-model="task.description"
                     @focus="$event.target.select()"
                     @change="updateTask(task._id,task.description, task.done)"

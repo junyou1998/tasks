@@ -7,9 +7,10 @@ var app = Express();
 app.use(cors());
 app.use(Express.json());
 
-var CONNECTION_STRING = "mongodb://localhost:27017";
+// var CONNECTION_STRING = "mongodb://localhost:27017";
+var CONNECTION_STRING = "mongodb+srv://junyou1998:Apple_77555@cluster0.69nmm1h.mongodb.net/?retryWrites=true&w=majority";
 var DATABASENAME = "tasksapp";
-var COLLECTIONNAME = "taskscollection"
+var COLLECTIONNAME = "taskscollection";
 var database;
 
 app.listen(5038, () => {
@@ -30,18 +31,26 @@ app.get("/api/tasks", (req, res) => {
             res.send(result);
         });
 });
-// 新增事項
+
 app.post("/api/tasks", multer().none(), (req, res) => {
-    database.collection(COLLECTIONNAME).count({}, (err, numOfDocs) => {
-        database.collection(COLLECTIONNAME).insertOne({
-            description: req.body.newTasks,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            done: false,
-        });
+    const newTask = {
+        description: req.body.newTasks,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        done: false,
+    };
+
+    database.collection(COLLECTIONNAME).insertOne(newTask, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: "Internal server error" });
+            return;
+        }
+
+        newTask._id = result.insertedId;
+        res.json(newTask);
     });
-    res.json("added successfully!!");
 });
+
 // 刪除事項
 app.delete("/api/tasks/:id", (req, res) => {
     database.collection(COLLECTIONNAME).deleteOne({
@@ -63,9 +72,8 @@ app.patch("/api/tasks/:id", (req, res) => {
                 console.log(err);
             } else {
                 console.log(result);
+                res.json(result);
             }
         }
     );
-
-    res.json("Update successfully!!" + req.params.id);
 });
