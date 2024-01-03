@@ -4,24 +4,36 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Task</title>
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
         <div id="app">
-            <h1>Tasks</h1>
-            <!-- {{tasks}} -->
-            <br />
-            <input id="newTask" />
-            <button @click="addNewTask()">Add Tasks</button>
-            <p v-for="task in tasks" :key="task._id">
-                {{task.description}}
-                <input type="checkbox" v-model="task.done" @change="updateTask(task._id,task.description, task.done)" />
+            <div class="appName">My Tasks</div>
 
-                <button @click="deleteTask(task._id)">Delete</button>
+            <div class="add">
+                <button @click="showInput()" id="addTask" title="新增工作"><i class="bx bx-message-square-add"></i> 新增工作</button>
+            </div>
+            <div class="newTask fade-transition" :class="{ 'fade-enter-active': addShow }">
+                <input type="text" id="newTask" class="inputText" @blur="addNewTask($event)" @keyup.enter="addNewTask($event)" placeholder="輸入工作內容"/>
+            </div>
+            <div v-for="task in tasks" :key="task._id" class="taskslist">
+                <input type="checkbox" v-model="task.done" @change="updateTask(task._id,task.description, task.done)" class="checkBtn" />
 
-                <input v-model="task.description" />
-                <button @click="updateTask(task._id, task.description,task.done)">Update</button>
-            </p>
+                <input
+                    type="text"
+                    v-model="task.description"
+                    @focus="$event.target.select()"
+                    @change="updateTask(task._id,task.description, task.done)"
+                    class="updateInput"
+                    title="點擊編輯"
+                    :class="task.done ? 'done':''"
+                />
+                <button @click="deleteTask(task._id)" class="delBtn" title="刪除"><i class="bx bx-trash"></i></button>
+            </div>
         </div>
 
         <script
@@ -32,6 +44,6 @@
         ></script>
 
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <script src="script.js"></script>
+        <script src="./script.js"></script>
     </body>
 </html>
