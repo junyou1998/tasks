@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <h1>Tasks</h1>
+            <!-- {{tasks}} -->
+            <br />
+            <input id="newTask" />
+            <button @click="addNewTask()">Add Tasks</button>
+            <p v-for="task in tasks" :key="task._id">
+                {{task.description}}
+                <input type="checkbox" v-model="task.done" @change="updateTask(task._id,task.description, task.done)" />
+
+                <button @click="deleteTask(task._id)">Delete</button>
+
+                <input v-model="task.description" />
+                <button @click="updateTask(task._id, task.description,task.done)">Update</button>
+            </p>
+        </div>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.3/axios.min.js"
+            integrity="sha512-JWQFV6OCC2o2x8x46YrEeFEQtzoNV++r9im8O8stv91YwHNykzIS2TbvAlFdeH0GVlpnyd79W0ZGmffcRi++Bw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
