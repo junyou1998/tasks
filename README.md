@@ -2,12 +2,11 @@
 
 [Demo: https://tasks.junyou.tw](https://tasks.junyou.tw)
 
-:::info
 由於api架設於Render免費服務，故可能因為休眠機制，首次進入會有啟動延遲時間
-:::
+
 
 ## 特色
-[![My Skills](https://skillicons.dev/icons?i=sass,vuejs,nodejs,express,mongodb&theme=light)]
+![My Skills](https://skillicons.dev/icons?i=sass,vuejs,nodejs,express,mongodb&theme=light)
 ### 前端
 1. vuejs
 2. scss
