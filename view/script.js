@@ -1,4 +1,7 @@
-const API_URL = "http://192.168.0.54:5038";
+// 外置api url 
+import config from './config.js';
+
+const API_URL = config.API_URL;
 const { ref, onMounted } = Vue;
 
 const App = {

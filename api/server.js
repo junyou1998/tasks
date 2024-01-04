@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var Express = require("express");
 var Mongoclient = require("mongodb").MongoClient;
 var cors = require("cors");
@@ -7,8 +9,7 @@ var app = Express();
 app.use(cors());
 app.use(Express.json());
 
-// var CONNECTION_STRING = "mongodb://localhost:27017";
-var CONNECTION_STRING = "mongodb+srv://junyou1998:Apple_77555@cluster0.69nmm1h.mongodb.net/?retryWrites=true&w=majority";
+var CONNECTION_STRING = process.env.CONNECTION_STRING;
 var DATABASENAME = "tasksapp";
 var COLLECTIONNAME = "taskscollection";
 var database;

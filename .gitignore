@@ -1,1 +1,4 @@
 /.DS_Store
+/view/config.js
+/api/.env
+/api/node_modules
