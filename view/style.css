@@ -9,11 +9,10 @@ html {
 
 body {
   width: 100%;
-  padding: 50px 0px;
+  padding: 50px 20px;
   display: flex;
   justify-content: center;
   position: relative;
-  overflow: hidden;
 }
 
 * {
@@ -34,7 +33,7 @@ body {
   text-align: center;
   background-color: #acc0d6;
   color: #fff;
-  padding: 8px;
+  padding: 8px 0px;
 }
 
 #app {
