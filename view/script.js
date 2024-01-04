@@ -18,8 +18,8 @@ const App = {
             });
         };
         // 新增事項
+        let enterPressed = false; //記錄按下事件
         const addNewTask = async (event) => {
-            let enterPressed = false; //記錄按下事件
 
             // 避免因enter造成觸發失焦事件造成兩次觸發
             if (event.type === "blur" && enterPressed) {
