@@ -3,10 +3,9 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: #f8f9fa;
-    
 }
 body {
+    background-color: #f8f9fa;
     width: 100%;
     padding: 50px 20px;
     display: flex;
@@ -20,13 +19,13 @@ body {
         font-size: 1rem;
     }
 }
-.tip{
+.tip {
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     text-align: center;
-    background-color:#acc0d6;
+    background-color: #acc0d6;
     color: #fff;
     padding: 8px 0px;
 }
@@ -48,39 +47,35 @@ body {
 }
 .add {
     padding: 10px;
-}
-.inputText {
-    padding: 15px;
-}
-#addTask {
-    width: 100%;
-    text-align: left;
-    border-radius: 20px;
-    padding: 5px 10px;
-    transition: 0.1s;
-    color: #1a73e8;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    &:hover {
-        background-color: #f7fafe;
-    }
-    margin-bottom: 5px;
+    #addTask {
+        width: 100%;
+        text-align: left;
+        border-radius: 20px;
+        padding: 5px 10px;
+        transition: 0.1s;
+        color: #1a73e8;
+        background-color: #fff;
+        border: none;
+        cursor: pointer;
+        &:hover {
+            background-color: #f7fafe;
+        }
+        margin-bottom: 5px;
 
-    i {
-        font-size: 1rem;
-        transform: translateY(1px);
+        i {
+            font-size: 1rem;
+            transform: translateY(1px);
+        }
     }
 }
-input[type="checkbox"] {
-    cursor: pointer;
-}
-.newTask{
+.newTask {
     padding-left: 35px;
+    .inputText {
+        padding: 15px;
+    }
 }
 .taskslist,
 .newTask {
-    // border: 1px solid #000;
     display: flex;
     &:hover {
         background-color: #f8f9fa;
@@ -106,12 +101,12 @@ input[type="checkbox"] {
         text-decoration: line-through;
     }
 }
-
 .delBtn {
     color: #a2a2a2;
     border: none;
     background: none;
     cursor: pointer;
+    // 避免觸控裝置點擊藍底現象 
     -webkit-tap-highlight-color: transparent;
     &:hover {
         color: rgb(229, 94, 91);
@@ -121,14 +116,14 @@ input[type="checkbox"] {
 
 .checkBtn {
     margin-left: 20px;
+    cursor: pointer;
 }
-
+// 漸變動畫 
 .fade-transition {
     transition: 0.5s ease;
     opacity: 0; /* 默认不可见 */
     max-height: 0;
 }
-
 .fade-enter-active {
     transition: 0.5s ease;
     opacity: 1; /* 完全可见 */

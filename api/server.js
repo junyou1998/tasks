@@ -1,19 +1,22 @@
+// 引入dotenv以讀取外部.env環境設定檔 
 require('dotenv').config();
 
-var Express = require("express");
-var Mongoclient = require("mongodb").MongoClient;
-var cors = require("cors");
+const Express = require("express");
+const Mongoclient = require("mongodb").MongoClient;
+const cors = require("cors");
 const multer = require("multer");
-var ObjectId = require("mongodb").ObjectId;
-var app = Express();
+const ObjectId = require("mongodb").ObjectId;
+const app = Express();
 app.use(cors());
 app.use(Express.json());
 
-var CONNECTION_STRING = process.env.CONNECTION_STRING;
-var DATABASENAME = "tasksapp";
-var COLLECTIONNAME = "taskscollection";
-var database;
+// 資料庫相關連接資訊 
+const CONNECTION_STRING = process.env.CONNECTION_STRING;
+const DATABASENAME = "tasksapp";
+const COLLECTIONNAME = "taskscollection";
+let database;
 
+// 服務啟用與資料庫連接 
 app.listen(5038, () => {
     console.log("server is running on port 5038");
     Mongoclient.connect(CONNECTION_STRING, (err, client) => {
@@ -32,7 +35,7 @@ app.get("/api/tasks", (req, res) => {
             res.send(result);
         });
 });
-
+// 新增事項 
 app.post("/api/tasks", multer().none(), (req, res) => {
     const newTask = {
         description: req.body.newTasks,
@@ -48,10 +51,10 @@ app.post("/api/tasks", multer().none(), (req, res) => {
         }
 
         newTask._id = result.insertedId;
+        // 回傳新增資訊 
         res.json(newTask);
     });
 });
-
 // 刪除事項
 app.delete("/api/tasks/:id", (req, res) => {
     database.collection(COLLECTIONNAME).deleteOne({
@@ -73,6 +76,7 @@ app.patch("/api/tasks/:id", (req, res) => {
                 console.log(err);
             } else {
                 console.log(result);
+                // 回傳更新資訊 
                 res.json(result);
             }
         }
