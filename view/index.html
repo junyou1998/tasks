@@ -12,9 +12,13 @@
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     </head>
     <body>
+        <div class="tip">
+            API 因休眠機制 首次運行偶有延遲 
+        </div>
+        
         <div id="app">
             <div class="appName">My Tasks</div>
-
+            
             <div class="add">
                 <button @click="showInput()" id="addTask" title="新增工作"><i class="bx bx-message-square-add"></i> 新增工作</button>
             </div>
@@ -35,6 +39,8 @@
                 <button @click="deleteTask(task._id)" class="delBtn" title="刪除"><i class="bx bx-trash"></i></button>
             </div>
         </div>
+
+
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.3/axios.min.js"

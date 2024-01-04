@@ -4,22 +4,33 @@ html {
     margin: 0;
     box-sizing: border-box;
     background-color: #f8f9fa;
-    display: flex;
-    justify-content: center;
+    
 }
 body {
     width: 100%;
-    padding: 20px;
+    padding: 50px 0px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 * {
-    // border: 1px solid #000;
     font-size: 0.95rem;
     font-family: "Noto Sans TC", sans-serif;
     @media screen and (max-width: 678px) {
         font-size: 1rem;
     }
 }
-
+.tip{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color:#acc0d6;
+    color: #fff;
+    padding: 8px;
+}
 #app {
     margin-top: 30px;
     background-color: #fff;
