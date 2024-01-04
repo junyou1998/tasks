@@ -9,6 +9,7 @@ const App = {
         const tasks = ref([]);
         const addShow = ref(false);
         // Task CRUD
+        // 取得所有Tasks 
         const getTasks = async () => {
             console.log("觸發update");
             axios.get(API_URL + "/api/tasks").then((res) => {
@@ -16,14 +17,18 @@ const App = {
                 console.log(res.data);
             });
         };
-        let enterPressed = false;
+        // 新增事項
         const addNewTask = async (event) => {
+            let enterPressed = false; //記錄按下事件
+
+            // 避免因enter造成觸發失焦事件造成兩次觸發
             if (event.type === "blur" && enterPressed) {
                 enterPressed = false;
                 return;
             }
             if (event.type === "keyup" && event.key === "Enter") {
                 enterPressed = true;
+                // 送出後跳離輸入框 
                 event.target.blur();
             }
 
@@ -48,6 +53,8 @@ const App = {
             }
             addShow.value = false;
         };
+
+        // 刪除事項 
         const deleteTask = async (_id) => {
             navigator.vibrate(10);
             axios.delete(API_URL + "/api/tasks/" + _id).then((res) => {
@@ -60,6 +67,8 @@ const App = {
                 console.log("delete successful");
             });
         };
+
+        // 更新事項 
         const updateTask = async (_id, updateValue, status) => {
             axios
                 .patch(API_URL + "/api/tasks/" + _id, { updateTask: updateValue, doneStatus: status })
@@ -76,15 +85,19 @@ const App = {
                     console.error("error updating task", err);
                 });
         };
+
+        // 新增輸入框的顯示狀態切換 
         const showInput = () => {
             navigator.vibrate(10);
             addShow.value = !addShow.value;
+            // 避免vue尚未更新無法抓取物件 使用nextTick確保已完成才執行
             Vue.nextTick(() => {
                 document.querySelector("#newTask").focus();
             });
         };
 
-        onMounted(getTasks);
+        onMounted(getTasks); //物件渲染完成後進行資料撈取
+
         return { tasks, addNewTask, deleteTask, updateTask, addShow, showInput };
     },
 };
