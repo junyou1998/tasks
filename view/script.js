@@ -56,7 +56,7 @@ const App = {
 
         // 刪除事項 
         const deleteTask = async (_id) => {
-            navigator.vibrate(10);
+            // navigator.vibrate(10);
             axios.delete(API_URL + "/api/tasks/" + _id).then((res) => {
                 // 刪除特定id的物件
                 const index = tasks.value.findIndex((task) => task._id === _id);
@@ -88,7 +88,7 @@ const App = {
 
         // 新增輸入框的顯示狀態切換 
         const showInput = () => {
-            navigator.vibrate(10);
+            // navigator.vibrate(10);
             addShow.value = !addShow.value;
             // 避免vue尚未更新無法抓取物件 使用nextTick確保已完成才執行
             Vue.nextTick(() => {
