@@ -4,10 +4,10 @@ html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: #f8f9fa;
 }
 
 body {
+  background-color: #f8f9fa;
   width: 100%;
   padding: 50px 20px;
   display: flex;
@@ -59,12 +59,7 @@ body {
 .add {
   padding: 10px;
 }
-
-.inputText {
-  padding: 15px;
-}
-
-#addTask {
+.add #addTask {
   width: 100%;
   text-align: left;
   border-radius: 20px;
@@ -76,20 +71,19 @@ body {
   cursor: pointer;
   margin-bottom: 5px;
 }
-#addTask:hover {
+.add #addTask:hover {
   background-color: #f7fafe;
 }
-#addTask i {
+.add #addTask i {
   font-size: 1rem;
   transform: translateY(1px);
 }
 
-input[type=checkbox] {
-  cursor: pointer;
-}
-
 .newTask {
   padding-left: 35px;
+}
+.newTask .inputText {
+  padding: 15px;
 }
 
 .taskslist,
@@ -103,6 +97,10 @@ input[type=checkbox] {
 .taskslist:focus-within,
 .newTask:focus-within {
   background-color: #f8f9fa;
+}
+
+.taskslist {
+  align-items: center;
 }
 
 .updateInput,
@@ -139,16 +137,19 @@ input[type=checkbox] {
 
 .checkBtn {
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .fade-transition {
   transition: 0.5s ease;
   opacity: 0; /* 默认不可见 */
   max-height: 0;
+  pointer-events: none;
 }
 
 .fade-enter-active {
   transition: 0.5s ease;
   opacity: 1; /* 完全可见 */
   max-height: 100px;
+  pointer-events: visible;
 }/*# sourceMappingURL=style.css.map */
